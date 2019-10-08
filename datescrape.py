@@ -23,15 +23,15 @@ def parseWeekDay(dayString):
 def parseMonth(monthString):
 	#returns the month number (from 0 to 11) from a string representing the month.
 	monthIndex = [['jan','january'],\
-  			     ['feb','january'],\
-  			     ['mar','january'],\
-  			     ['apr','january'],\
+  			     ['feb','februaru'],\
+  			     ['mar','march'],\
+  			     ['apr','april'],\
   			     ['may'],\
-  			     ['jun','january'],\
-  			     ['jul','january'],\
-  			     ['aug','january'],\
+  			     ['jun','june'],\
+  			     ['jul','july'],\
+  			     ['aug','august'],\
   			     ['sep','sept','september'],\
-  			     ['oct','octuber'],\
+  			     ['oct','october'],\
   			     ['nov','november'],\
   			     ['dec','december']]
 					
