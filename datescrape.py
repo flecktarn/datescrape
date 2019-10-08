@@ -52,14 +52,17 @@ except IndexError:
 date = [0,0,0]
 
 #cases:
-#date formatted like: 1(st) January 2019
-format1 = r"([\d]+)[\w]*[\s]*([\w]*)[\s]*([\d]*)"
+#date formatted like: 1(st) Jan(uary) 2019
+format1 = r"^[\s]*([\d]+)[\w]+[\s]+([\w]*)[\s]+([\d]*)[\s]*$"
+
+#date formatted like: Jan(uary) 1(st) 2019
+format2 = r"^[\s]*([a-z]+)[\s]+([\d]+)[\w]*[\s]*([\d]*)[\s]*$"
 
 #date formatted like: 1 1 2019
-format2 = r"^[\s]*([\d]*)[\s]*([\d]*)[\s]*([\d]*)[\s]*$"
+format3 = r"^[\s]*([\d]*)[\s]*([\d]*)[\s]*([\d]+)[\s]*$"
 
 #next tuesday, last monday
-format3 = r"(next|last)[\s]*([\w]*)"
+format4 = r"^[\s]*(next|last)[\s]*([\w]*)[\s]*$"
 
 #print(parseWeekDay(parseMe))
 print(parseMonth(parseMe))
