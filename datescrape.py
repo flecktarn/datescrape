@@ -30,13 +30,13 @@ date = [0,0,0]
 
 #cases:
 #date formatted like: 1(st) January 2019
-format1=r"([\d]+)[\w]*[\s]*([\w]*)[\s]*([\d]*)"
+format1 = r"([\d]+)[\w]*[\s]*([\w]*)[\s]*([\d]*)"
 
 #date formatted like: 1 1 2019
-format2=r"^[\s]*([\d]*)[\s]*([\d]*)[\s]*([\d]*)[\s]*$"
+format2 = r"^[\s]*([\d]*)[\s]*([\d]*)[\s]*([\d]*)[\s]*$"
 
 #next tuesday, last monday
-format3="(next|last)[\\s]*([\\w]*)"
+format3 = r"(next|last)[\s]*([\w]*)"
 
 
 
