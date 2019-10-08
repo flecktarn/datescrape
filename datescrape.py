@@ -90,9 +90,6 @@ def parseTime(timeString):
 		#handle length of time string
 		if(len(timeMatch) in [1,2]):
 			hours = int(timeMatch)
-			if hours > 23:
-				print("Error. Invalid value. Hours cannot exceed 23")
-				return
 			minutes = 0
 
 
@@ -106,6 +103,11 @@ def parseTime(timeString):
 			minutes = int(timeMatch[2:])
 
 		
+		if hours > 23:
+			print("Error. Invalid value. Hours cannot exceed 23")
+			return
+		if minutes > 59:
+			print("Error. Invalid value. Minutes cannot exceed 59")
 		timeArray = [hours,minutes]
 
 
