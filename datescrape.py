@@ -19,6 +19,29 @@ def parseWeekDay(dayString):
 
 	return -1
 
+
+def parseMonth(monthString):
+	#returns the month number (from 0 to 11) from a string representing the month.
+	monthIndex = [['jan','january'],\
+  			     ['feb','january'],\
+  			     ['mar','january'],\
+  			     ['apr','january'],\
+  			     ['may'],\
+  			     ['jun','january'],\
+  			     ['jul','january'],\
+  			     ['aug','january'],\
+  			     ['sep','sept','september'],\
+  			     ['oct','octuber'],\
+  			     ['nov','november'],\
+  			     ['dec','december']]
+					
+	for i in range(len(monthIndex)):
+		for j in range(len(monthIndex[i])):
+			if monthIndex[i][j] == monthString.lower():
+				return i
+
+	return -1
+
 try:
 	parseMe = sys.argv[1]
 except IndexError:
@@ -38,7 +61,8 @@ format2 = r"^[\s]*([\d]*)[\s]*([\d]*)[\s]*([\d]*)[\s]*$"
 #next tuesday, last monday
 format3 = r"(next|last)[\s]*([\w]*)"
 
+#print(parseWeekDay(parseMe))
+print(parseMonth(parseMe))
 
 
 
-print(parseWeekDay(parseMe))
