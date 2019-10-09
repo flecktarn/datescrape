@@ -134,7 +134,6 @@ def parseTime(timeString):
 
 	timeArray += [period]
 
-	print(timeArray)
 
 	return timeArray
 
@@ -209,16 +208,31 @@ def parseDate(dateString):
 			try:
 				value = int(value)
 			except ValueError:
-				print(parseMonth(value))
 				if parseMonth(value) > 0:
 					value = parseMonth(value)
 				else:
 					print("Count not parse month")
 					return []
 
+		if typ == 2 and bestMatch[i] == '':
+			#year not given, handle it automatically
+			dateNow = datetime.datetime.now()
+			#if current date is greater than the one given, then set year to next year
+			#otherwise set it to current year
+			dateThen = datetime.datetime(dateNow.year,dateArray[1],dateArray[0])
+
+			if((dateNow-dateThen).days < 0):
+				dateArray[2] = dateNow.year
+			else:
+				dateArray[2] = dateNow.year+1
 
 
-		dateArray[typ] = int(value)
+		else:
+			dateArray[typ] = int(value)
+
+
+
+
 
 
 
@@ -229,13 +243,40 @@ def parseDate(dateString):
 
 
 def scrapeDateAndTime(dateAndTimeString):
-	#date and time to be given as "Date @ Time" or "Date at Time"
+	#date and time to be given as "Date @ Time" or "Date at Time" 
+	#Input can disclude date and or time individually, e.g: "Date" or "@Time"
+	#returns a date and time object 
+	dateFound=False
+	timeFound=False
+
+	splitter = dateAndTimeString.split("@")
+	if len(splitter) == 2:
+		if splitter[0]:
+			dateFound = True;
+		if splitter[1]:
+			timeFound = True;
+
+	print(splitter)
+	date = parseDate(splitter[0])
+	print(date)
+
+	time = parseTime(splitter[1])
+	print(time)
+
+	hours = time[0]
+	if time[2] == 1:
+		hours += 12
+	mins = time[1]
+
+
+	date = datetime.datetime(date[2],date[1],date[0],hours,mins)
+
+	print(date)
 
 
 
 
-#print(parseWeekDay(parseMe))
-#print(parseMonth(parseMe))
+
 
 try:
 	parseMe = sys.argv[1] 
@@ -248,10 +289,11 @@ except IndexError:
 
 
 
-
+#print(parseWeekDay(parseMe))
+#print(parseMonth(parseMe))
 #parseMeList = parseMe.split("@")
-print(parseDate(parseMe))
-
+#print(parseDate(parseMe))
+scrapeDateAndTime(parseMe)
 
 
 
