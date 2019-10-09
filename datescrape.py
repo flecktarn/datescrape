@@ -227,6 +227,13 @@ def parseDate(dateString):
 
 
 
+
+def scrapeDateAndTime(dateAndTimeString):
+	#date and time to be given as "Date @ Time" or "Date at Time"
+
+
+
+
 #print(parseWeekDay(parseMe))
 #print(parseMonth(parseMe))
 
@@ -236,6 +243,10 @@ try:
 except IndexError:
 	print(f"Error, expected 1 argument, received {len(sys.argv)-1}")
 	exit()
+
+
+
+
 
 
 #parseMeList = parseMe.split("@")
