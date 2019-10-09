@@ -260,13 +260,19 @@ def scrapeDateAndTime(dateAndTimeString):
 	date = parseDate(splitter[0])
 	print(date)
 
-	time = parseTime(splitter[1])
-	print(time)
+	if(len(splitter) == 2 ):	
+		time = parseTime(splitter[1])
+		print(time)
+		hours = time[0]
+		if time[2] == 1:
+			hours += 12
+		mins = time[1]
 
-	hours = time[0]
-	if time[2] == 1:
-		hours += 12
-	mins = time[1]
+	else:
+		hours = 23
+		mins = 59
+
+
 
 
 	date = datetime.datetime(date[2],date[1],date[0],hours,mins)
