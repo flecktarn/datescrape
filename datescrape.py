@@ -226,7 +226,7 @@ def parseDate(dateString):
 				print("Error. Invalid date.")
 				return
 
-			if((dateNow-dateThen).days < 0):
+			if(dateNow < dateThen):
 				dateArray[2] = dateNow.year
 			else:
 				dateArray[2] = dateNow.year+1
@@ -247,7 +247,7 @@ def parseDate(dateString):
 
 
 
-def parse_dat(dateAndTimeString):
+def scrapeDate(dateAndTimeString):
 	#date and time to be given as "Date @ Time" or "Date at Time" 
 	#Input can disclude date and or time individually, e.g: "Date" or "@Time"
 	#returns a date and time object 
@@ -264,33 +264,60 @@ def parse_dat(dateAndTimeString):
 			timeFound = True;
 
 
-	date = parseDate(splitter[0])
 
 	if(len(splitter) == 2 ):	
-		time = parseTime(splitter[1])
+		if splitter[0] == "":
+			#time given, no date
+			time = parseTime(splitter[1])
+
+			rightNow = datetime.datetime.now()
+			years = rightNow.year
+			months = rightNow.month
+			days = rightNow.day
+
+
+		else:
+			date = parseDate(splitter[0])
+			#date and time given
+			time = parseTime(splitter[1])
+			years = date[2]
+			months = date[1]
+			days = date[0]
+
+
 		hours = time[0]
 		if time[2] == 1:
 			hours += 12
 		mins = time[1]
 
+
+
 	else:
+		#date given, no time
 		hours = 23
 		mins = 59
 
+		years = date[2]
+		months = date[1]
+		days = date[0]
 
 
-	try:
-		date = datetime.datetime(date[2],date[1],date[0],hours,mins)
+
+
+	
+	datum = datetime.datetime(years, months, days, hours, mins)
+	'''
 	except:
 		print("Error. Invalid date.")
 		return
-
-	return date
-
+	'''
 
 
+	return datum
 
-'''
+
+
+
 
 try:
 	parseMe = sys.argv[1] 
@@ -299,7 +326,8 @@ except IndexError:
 	print(f"Error, expected 1 argument, received {len(sys.argv)-1}")
 	exit()
 
-
+scrape_dat(parseMe)
+'''
 
 
 #print(parseWeekDay(parseMe))
