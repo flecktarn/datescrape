@@ -34,6 +34,7 @@ def parseMonth(monthString):
   			     ['oct','october'],\
   			     ['nov','november'],\
   			     ['dec','december']]
+
 					
 	for i in range(len(monthIndex)):
 		for j in range(len(monthIndex[i])):
@@ -262,6 +263,7 @@ def scrapeDateAndTime(dateAndTimeString):
 		if splitter[1]:
 			timeFound = True;
 
+
 	date = parseDate(splitter[0])
 
 	if(len(splitter) == 2 ):	
@@ -291,7 +293,7 @@ def scrapeDateAndTime(dateAndTimeString):
 
 
 try:
-	parseMe = sys.argv[1] 
+	parseMe = sys.argv[1].lower() 
 #	print(f'query = "{parseMe}"')
 except IndexError:
 	print(f"Error, expected 1 argument, received {len(sys.argv)-1}")
