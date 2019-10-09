@@ -249,6 +249,8 @@ def scrapeDateAndTime(dateAndTimeString):
 	dateFound=False
 	timeFound=False
 
+	dateAndTimeString = dateAndTimeString.replace("at","@")
+
 	splitter = dateAndTimeString.split("@")
 	if len(splitter) == 2:
 		if splitter[0]:
@@ -256,13 +258,10 @@ def scrapeDateAndTime(dateAndTimeString):
 		if splitter[1]:
 			timeFound = True;
 
-	print(splitter)
 	date = parseDate(splitter[0])
-	print(date)
 
 	if(len(splitter) == 2 ):	
 		time = parseTime(splitter[1])
-		print(time)
 		hours = time[0]
 		if time[2] == 1:
 			hours += 12
@@ -286,7 +285,7 @@ def scrapeDateAndTime(dateAndTimeString):
 
 try:
 	parseMe = sys.argv[1] 
-	print(f'query = "{parseMe}"')
+#	print(f'query = "{parseMe}"')
 except IndexError:
 	print(f"Error, expected 1 argument, received {len(sys.argv)-1}")
 	exit()
