@@ -153,6 +153,8 @@ date = [0,0,0]
 
 def parseDate(dateString):
 
+	#takes a date string and calculates the date referred to as a dateTime object
+
 	#cases:
 	#date formatted like: 1(st) Jan(uary) 2019
 	format1 = r"^[\s]*([\d]+)[a-z]*[\s]+([a-z]+)[\s]*([\d]*)[\s]*$"
@@ -170,6 +172,9 @@ def parseDate(dateString):
 
 
 
+
+	matchMap = [[0,1,2],[1,0,2],[0,1,2]]
+
 	matchList = [[],[],[],[]]
 
 	for i in range(len(formats)):
@@ -180,12 +185,18 @@ def parseDate(dateString):
 
 	bestMatch = matchList[0]
 	bestMatchCount = 0
+	bestMatchIndex = 0
 
-	for i in matchList:
-		matchCount = len(i)
+	for i in range(len(matchList)):
+		matchCount = len(matchList[i])
 		if matchCount > bestMatchCount:
 			bestMatchCount = matchCount
-			bestMatch = i
+			bestMatch = matchList[i]
+
+	#if there is no match then return an empty array
+	if not bestMatch:
+		print("No match found.")
+		return []
 
 	#print(bestMatch)
 	return bestMatch
