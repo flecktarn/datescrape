@@ -183,7 +183,7 @@ def parseDate(dateString):
 
 	for i in matchList:
 		matchCount = len(i)
-		if matchCount > bestMatchCoun:
+		if matchCount > bestMatchCount:
 			bestMatchCount = matchCount
 			bestMatch = i
 
