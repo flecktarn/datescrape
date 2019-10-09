@@ -219,7 +219,11 @@ def parseDate(dateString):
 			dateNow = datetime.datetime.now()
 			#if current date is greater than the one given, then set year to next year
 			#otherwise set it to current year
-			dateThen = datetime.datetime(dateNow.year,dateArray[1],dateArray[0])
+			try:
+				dateThen = datetime.datetime(dateNow.year,dateArray[1],dateArray[0])
+			except:
+				print("Error. Invalid date.")
+				return
 
 			if((dateNow-dateThen).days < 0):
 				dateArray[2] = dateNow.year
@@ -273,8 +277,11 @@ def scrapeDateAndTime(dateAndTimeString):
 
 
 
-
-	date = datetime.datetime(date[2],date[1],date[0],hours,mins)
+	try:
+		date = datetime.datetime(date[2],date[1],date[0],hours,mins)
+	except:
+		print("Error. Invalid date.")
+		return
 
 	print(date)
 
