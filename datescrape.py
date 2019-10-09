@@ -154,6 +154,7 @@ date = [0,0,0]
 def parseDate(dateString):
 
 	#takes a date string and calculates the date referred to as a dateTime object
+	print(dateString)
 
 	#cases:
 	#date formatted like: 1(st) Jan(uary) 2019
@@ -163,7 +164,7 @@ def parseDate(dateString):
 	format2 = r"^[\s]*([a-z]+)[\s]+([\d]+)[\w]*[\s]*([\d]*)[\s]*$"
 
 	#date formatted like: 1 1 2019
-	format3 = r"^[\s]*([\d]*)[\s]*([\d]*)[\s]*([\d]+)[\s]*$"
+	format3 = r"^[\s]*([\d]+)[\s]*([\d]+)[\s]*([\d]*)[\s]*$"
 
 	#next tuesday, last monday
 	format4 = r"^[\s]*(next|last)[\s]*([\w]*)[\s]*$"
@@ -212,7 +213,7 @@ def parseDate(dateString):
 				if parseMonth(value) > 0:
 					value = parseMonth(value)
 				else:
-					print("Count not parse month")
+					print("Could not parse month")
 					return []
 
 		if typ == 2 and bestMatch[i] == '':
@@ -293,7 +294,7 @@ def scrapeDateAndTime(dateAndTimeString):
 
 
 try:
-	parseMe = sys.argv[1].lower() 
+	parseMe = sys.argv[1] 
 #	print(f'query = "{parseMe}"')
 except IndexError:
 	print(f"Error, expected 1 argument, received {len(sys.argv)-1}")
