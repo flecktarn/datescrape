@@ -52,6 +52,10 @@ def parseTime(timeString):
 
 	matched = re.match(query, timeString)
 
+	if not matched:
+		print("Error. Could not parse a valid time, ensure you format correctly.")
+		return
+
 	matches = matched.groups()
 
 	if matches[0] == "":
@@ -108,6 +112,7 @@ def parseTime(timeString):
 			return
 		if minutes > 59:
 			print("Error. Invalid value. Minutes cannot exceed 59")
+			return
 		timeArray = [hours,minutes]
 
 
@@ -116,6 +121,8 @@ def parseTime(timeString):
 
 	if periodMatch.lower() in ['a','am']:
 		period = 0
+		if timeArray[0] == 0:
+			timeArray[0] = 12
 
 	elif periodMatch.lower() in ['p','pm']:
 		period = 1
@@ -139,33 +146,71 @@ def parseTime(timeString):
 
 
 
-try:
-	parseMe = sys.argv[1]
-except IndexError:
-	print(f"Error, expected 1 argument, received {len(sys.argv)-1}")
-	exit()
 
 #initialize date
 date = [0,0,0]
 
-#cases:
-#date formatted like: 1(st) Jan(uary) 2019
-format1 = r"^[\s]*([\d]+)[\w]+[\s]+([\w]*)[\s]+([\d]*)[\s]*$"
 
-#date formatted like: Jan(uary) 1(st) 2019
-format2 = r"^[\s]*([a-z]+)[\s]+([\d]+)[\w]*[\s]*([\d]*)[\s]*$"
+def parseDate(dateString):
 
-#date formatted like: 1 1 2019
-format3 = r"^[\s]*([\d]*)[\s]*([\d]*)[\s]*([\d]+)[\s]*$"
+	#cases:
+	#date formatted like: 1(st) Jan(uary) 2019
+	format1 = r"^[\s]*([\d]+)[a-z]*[\s]+([a-z]+)[\s]*([\d]*)[\s]*$"
 
-#next tuesday, last monday
-format4 = r"^[\s]*(next|last)[\s]*([\w]*)[\s]*$"
+	#date formatted like: Jan(uary) 1(st) 2019
+	format2 = r"^[\s]*([a-z]+)[\s]+([\d]+)[\w]*[\s]*([\d]*)[\s]*$"
+
+	#date formatted like: 1 1 2019
+	format3 = r"^[\s]*([\d]*)[\s]*([\d]*)[\s]*([\d]+)[\s]*$"
+
+	#next tuesday, last monday
+	format4 = r"^[\s]*(next|last)[\s]*([\w]*)[\s]*$"
+
+	formats = [format1,format2,format3,format4]
+
+
+
+	matchList = [[],[],[],[]]
+
+	for i in range(len(formats)):
+		matched = re.match(formats[i],dateString)
+		if matched:
+			matchList[i] = matched.groups()
+
+
+	bestMatch = matchList[0]
+	bestMatchCount = 0
+
+	for i in matchList:
+		matchCount = len(i)
+		if matchCount > bestMatchCoun:
+			bestMatchCount = matchCount
+			bestMatch = i
+
+	#print(bestMatch)
+	return bestMatch
+
+
 
 #print(parseWeekDay(parseMe))
 #print(parseMonth(parseMe))
 
+try:
+	parseMe = sys.argv[1] 
+	print(f'query = "{parseMe}"')
+except IndexError:
+	print(f"Error, expected 1 argument, received {len(sys.argv)-1}")
+	exit()
 
-parseTime(parseMe)
+
+#parseMeList = parseMe.split("@")
+print(parseDate(parseMe))
+
+
+
+
+
+
 
 
 
