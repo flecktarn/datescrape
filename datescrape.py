@@ -154,7 +154,6 @@ date = [0,0,0]
 def parseDate(dateString):
 
 	#takes a date string and calculates the date referred to as a dateTime object
-	print(dateString)
 
 	#cases:
 	#date formatted like: 1(st) Jan(uary) 2019
@@ -248,7 +247,7 @@ def parseDate(dateString):
 
 
 
-def scrapeDateAndTime(dateAndTimeString):
+def parse_dat(dateAndTimeString):
 	#date and time to be given as "Date @ Time" or "Date at Time" 
 	#Input can disclude date and or time individually, e.g: "Date" or "@Time"
 	#returns a date and time object 
@@ -286,12 +285,12 @@ def scrapeDateAndTime(dateAndTimeString):
 		print("Error. Invalid date.")
 		return
 
-	print(date)
+	return date
 
 
 
 
-
+'''
 
 try:
 	parseMe = sys.argv[1] 
@@ -303,12 +302,17 @@ except IndexError:
 
 
 
-
 #print(parseWeekDay(parseMe))
 #print(parseMonth(parseMe))
 #parseMeList = parseMe.split("@")
 #print(parseDate(parseMe))
-scrapeDateAndTime(parseMe)
+while True:
+	parseMe = input("Prompt: ")
+	try:
+		print(scrapeDateAndTime(parseMe))
+	except:
+		print("Error occured, please try again.")
+		continue
 
 
 
@@ -316,4 +320,4 @@ scrapeDateAndTime(parseMe)
 
 
 
-
+'''
