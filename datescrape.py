@@ -38,9 +38,9 @@ def parseMonth(monthString):
 	for i in range(len(monthIndex)):
 		for j in range(len(monthIndex[i])):
 			if monthIndex[i][j] == monthString.lower():
-				return i
+				return i+1
 
-	return -1
+	return 0
 
 
 def parseTime(timeString):
@@ -192,14 +192,38 @@ def parseDate(dateString):
 		if matchCount > bestMatchCount:
 			bestMatchCount = matchCount
 			bestMatch = matchList[i]
+			bestMatchIndex = i
 
 	#if there is no match then return an empty array
 	if not bestMatch:
 		print("No match found.")
 		return []
 
-	#print(bestMatch)
-	return bestMatch
+
+	dateArray = [0,0,0]
+
+	for i in range(len(matchMap[bestMatchIndex])):
+		value = bestMatch[i]
+		typ = matchMap[bestMatchIndex][i] 
+		if typ == 1:
+			try:
+				value = int(value)
+			except ValueError:
+				print(parseMonth(value))
+				if parseMonth(value) > 0:
+					value = parseMonth(value)
+				else:
+					print("Count not parse month")
+					return []
+
+
+
+		dateArray[typ] = int(value)
+
+
+
+
+	return dateArray 
 
 
 
